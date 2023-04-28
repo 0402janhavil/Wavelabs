@@ -7,14 +7,10 @@ int networkDelayTime(vector<vector<int>>& times, int n, int k) {
     vector<vector<pair<int,int>>> graph(n+1);
     vector<int> dist(n+1, INF);
     vector<bool> visited(n+1, false);
-    
-    // construct the graph
     for (auto edge : times) {
         int u = edge[0], v = edge[1], w = edge[2];
         graph[u].push_back({v, w});
     }
-    
-    // dijkstra's algorithm
     priority_queue<pair<int,int>, vector<pair<int,int>>, greater<pair<int,int>>> pq;
     pq.push({0, k});
     dist[k] = 0;
@@ -35,7 +31,6 @@ int networkDelayTime(vector<vector<int>>& times, int n, int k) {
         }
     }
     
-    // check if all nodes are reachable and find the max distance
     int max_dist = 0;
     for (int i = 1; i <= n; i++) {
         if (dist[i] == INF) return -1;
